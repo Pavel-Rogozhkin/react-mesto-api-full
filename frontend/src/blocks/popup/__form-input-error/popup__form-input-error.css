@@ -1,0 +1,13 @@
+.popup__form-input-error {
+  margin: 0;
+  padding: 0;
+  /* padding-top: -19px; */
+  width: 100%;
+  height: 19px;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #FF0000;
+}

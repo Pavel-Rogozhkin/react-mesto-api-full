@@ -1,0 +1,11 @@
+.element__photo {
+  max-width: 282px;
+  max-height: 282px;
+  border-radius: inherit;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}

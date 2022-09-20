@@ -1,0 +1,13 @@
+.element__heart_ind_count {
+  margin: 0;
+  padding: 0;
+  margin-top: 20px;
+  color: black;
+  opacity: 1;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
+}

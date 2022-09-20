@@ -1,0 +1,17 @@
+.navlink__element {
+  margin: 0;
+  padding: 0;
+  color: white;
+  text-decoration: none;
+  font-family: "Inter", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  transition: opacity .7s linear;
+  cursor: pointer;
+};
+
+.navlink__element:hover {
+  opacity: 0.6;
+};
