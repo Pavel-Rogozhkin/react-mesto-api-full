@@ -12,7 +12,7 @@ const { NotFoundError } = require('./errors/not-found-err');
 const { regexValidUrl } = require('./utils/consts');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 4000 } = process.env;
 
 const SERVER_CODE = 500;
 
@@ -24,6 +24,12 @@ app.use(
 );
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+}),
+);
 
 app.use(requestLogger);
 

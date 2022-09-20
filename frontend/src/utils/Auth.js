@@ -56,4 +56,4 @@ class Auth {
 
 };
 
-export default new Auth("https://auth.nomoreparties.co");
+export default new Auth("http://localhost:4000");

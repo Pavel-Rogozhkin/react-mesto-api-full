@@ -91,4 +91,4 @@ class Api {
 
 };
 
-export default new Api('https://mesto.nomoreparties.co/v1/cohort-43');
+export default new Api('http://localhost:4000');
