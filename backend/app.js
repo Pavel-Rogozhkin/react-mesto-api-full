@@ -18,6 +18,7 @@ const { PORT = 4000 } = process.env;
 const SERVER_CODE = 500;
 
 const app = express();
+
 app.use(
   bodyParser.urlencoded({
     extended: false,
@@ -25,7 +26,10 @@ app.use(
 );
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: [
+    'http://localhost:3000',
+    'http://pashalex.nomorepartiesxyz.ru',
+  ],
   credentials: true,
 }));
 
