@@ -3,6 +3,7 @@ class Api {
     this._url = url;
     this._headers = {
       'Content-Type': 'application/json',
+      authorization: '05e45ebf-d4ff-4e41-8bcf-ab592cb66400',
     };
   };
 
@@ -15,18 +16,18 @@ class Api {
   
   changeCardLikeState(cardId, like) {
     return fetch(`${this._url}/cards/${cardId}/likes`, {
-      method: like ? 'PUT' : 'DELETE',
       headers: this._headers,
       credentials: 'include',
+      method: like ? 'PUT' : 'DELETE',
     })
       .then((res) => this._getResponseData(res))
   };
 
   getCards() {
     return fetch(this._url + '/cards', {
-      method: 'GET',
       headers: this._headers,
-      credentials: 'include',
+      // credentials: 'include',
+      method: 'GET',
     })
       .then((res) => this._getResponseData(res))
   };
@@ -38,10 +39,10 @@ class Api {
     };
 
     return fetch(this._url + '/cards', {
-      method: 'POST',
       headers: this._headers,
-      body: JSON.stringify(body),
       credentials: 'include',
+      method: 'POST',
+      body: JSON.stringify(body),
     })
       .then((res) => this._getResponseData(res))
   };
@@ -49,8 +50,8 @@ class Api {
   deleteCard(cardId) {
     return fetch(`${this._url}/cards/${cardId}`, {
       headers: this._headers,
-      method: 'DELETE',
       credentials: 'include',
+      method: 'DELETE',
     })
       .then((res) => this._getResponseData(res))
   };
@@ -58,8 +59,8 @@ class Api {
   getUserInfo() {
     return fetch(`${this._url}/users/me`, {
       headers: this._headers,
+      // credentials: 'include',
       method: 'GET',
-      credentials: 'include',
     })
       .then((res) => this._getResponseData(res))
   };
@@ -72,9 +73,9 @@ class Api {
 
     return fetch(`${this._url}/users/me`, {
       headers: this._headers,
+      credentials: 'include',
       method: 'PATCH',
       body: JSON.stringify(body),
-      credentials: 'include',
     })
       .then((res) => this._getResponseData(res))
     
@@ -87,9 +88,9 @@ class Api {
 
     return fetch(`${this._url}/users/me/avatar`, {
       headers: this._headers,
+      credentials: 'include',
       method: 'PATCH',
       body: JSON.stringify(body),
-      credentials: 'include',
     })
       .then((res) => this._getResponseData(res))
     

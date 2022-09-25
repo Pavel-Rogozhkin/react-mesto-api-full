@@ -134,8 +134,10 @@ const login = async (req, res, next) => {
 const getMainUserInfo = async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id);
+    console.log(user);
     return res.send(user);
   } catch (err) {
+    console.log(err);
     return next(err);
   }
 };

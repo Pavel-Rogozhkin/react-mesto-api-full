@@ -23,12 +23,6 @@ class Auth {
       }),
     })
     .then(this._getResponseData)
-    .then((res) => {
-      if (res.token) {
-        localStorage.setItem("jwt", res.token);
-        return localStorage.jwt;
-      };
-    })
   };
 
   register(email, password) {
@@ -48,7 +42,6 @@ class Auth {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
       }
     })
     .then(this._getResponseData)

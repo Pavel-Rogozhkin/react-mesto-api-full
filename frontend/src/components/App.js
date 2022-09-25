@@ -30,14 +30,25 @@ function App() {
   const [authorizedEmail, setAuthorizedEmail] = useState("");
   const [regOk, setRegOk] = useState(false);
 
+  console.log(loggedIn);
+
   useEffect( () => {
-    if (loggedIn) {
-      Promise.all([ Api.getCards(), Api.getUserInfo() ])
-      .then(( [ cardsItems, userProfile ] ) => {
+    if (!loggedIn) {
+      Api.getUserInfo()
+      .then(( userProfile ) => {
         setLoggedIn(true);
-        setCards(cardsItems);
         setCurrentUser(userProfile);
         })
+      .catch(err => {console.log(err)});
+    }
+  }, [loggedIn] );
+
+  useEffect( () => {
+    if (loggedIn) {
+      Api.getCards()
+      .then(( cardsItems ) => {
+        setCards(cardsItems);
+      })
       .catch(err => {console.log(err)});
     }
   }, [loggedIn] );
