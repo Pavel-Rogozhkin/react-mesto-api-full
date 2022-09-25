@@ -57,7 +57,7 @@ function Register(props) {
         <p className="navlink__element" style={{cursor: `${nopointer}`}}>Уже зарегистрированы?&nbsp;</p>
         <NavLink
           className="navlink__element"
-          to="/sign-in"
+          to="/signin"
         >
           Войти
         </NavLink>

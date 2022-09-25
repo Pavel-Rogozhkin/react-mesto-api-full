@@ -15,6 +15,7 @@ class Auth {
 
   authorize(email, password) {
     return fetch(`${this._url}/signin`, {
+      credentials: 'include',
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
@@ -27,6 +28,7 @@ class Auth {
 
   register(email, password) {
     return fetch(`${this._url}/signup`, {
+      credentials: 'include',
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
@@ -39,10 +41,9 @@ class Auth {
   
   tokenValidation(token) {
     return fetch(`${this._url}/users/me`, {
+      credentials: 'include',
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      }
+      headers: this._headers,
     })
     .then(this._getResponseData)
   };

@@ -131,11 +131,11 @@ function App() {
   //   handleTokenValid();
   // }, []);
 
-  useEffect(() => {
-    if (loggedIn) {
-      history.push('/');
-    }
-  }, [history, loggedIn]);
+  // useEffect(() => {
+  //   if (loggedIn) {
+  //     history.push('/');
+  //   }
+  // }, [history, loggedIn]);
 
   // function handleTokenValid() {
   //   if (localStorage.getItem('jwt')) {
@@ -185,7 +185,7 @@ function App() {
   };
 
   function signOut() {
-    localStorage.removeItem("jwt");
+    // localStorage.removeItem("jwt");
     setLoggedIn(false);
     history.push("/signin");
   };
