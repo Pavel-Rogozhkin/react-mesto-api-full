@@ -3,7 +3,6 @@ class Api {
     this._url = url;
     this._headers = {
       'Content-Type': 'application/json',
-      authorization: '05e45ebf-d4ff-4e41-8bcf-ab592cb66400',
     };
   };
 
@@ -17,7 +16,8 @@ class Api {
   changeCardLikeState(cardId, like) {
     return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: like ? 'PUT' : 'DELETE',
-      headers: this._headers
+      headers: this._headers,
+      credentials: 'include',
     })
       .then((res) => this._getResponseData(res))
   };
@@ -25,7 +25,8 @@ class Api {
   getCards() {
     return fetch(this._url + '/cards', {
       method: 'GET',
-      headers: this._headers
+      headers: this._headers,
+      credentials: 'include',
     })
       .then((res) => this._getResponseData(res))
   };
@@ -40,6 +41,7 @@ class Api {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify(body),
+      credentials: 'include',
     })
       .then((res) => this._getResponseData(res))
   };
@@ -48,6 +50,7 @@ class Api {
     return fetch(`${this._url}/cards/${cardId}`, {
       headers: this._headers,
       method: 'DELETE',
+      credentials: 'include',
     })
       .then((res) => this._getResponseData(res))
   };
@@ -56,6 +59,7 @@ class Api {
     return fetch(`${this._url}/users/me`, {
       headers: this._headers,
       method: 'GET',
+      credentials: 'include',
     })
       .then((res) => this._getResponseData(res))
   };
@@ -70,6 +74,7 @@ class Api {
       headers: this._headers,
       method: 'PATCH',
       body: JSON.stringify(body),
+      credentials: 'include',
     })
       .then((res) => this._getResponseData(res))
     
@@ -84,6 +89,7 @@ class Api {
       headers: this._headers,
       method: 'PATCH',
       body: JSON.stringify(body),
+      credentials: 'include',
     })
       .then((res) => this._getResponseData(res))
     

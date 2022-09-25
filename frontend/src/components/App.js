@@ -34,6 +34,7 @@ function App() {
     if (loggedIn) {
       Promise.all([ Api.getCards(), Api.getUserInfo() ])
       .then(( [ cardsItems, userProfile ] ) => {
+        setLoggedIn(true);
         setCards(cardsItems);
         setCurrentUser(userProfile);
         })
@@ -115,9 +116,9 @@ function App() {
       .catch(err => {console.log(err)});
   };
 
-  useEffect(() => {
-    handleTokenValid();
-  }, []);
+  // useEffect(() => {
+  //   handleTokenValid();
+  // }, []);
 
   useEffect(() => {
     if (loggedIn) {
@@ -125,31 +126,28 @@ function App() {
     }
   }, [history, loggedIn]);
 
-  function handleTokenValid() {
-    if (localStorage.getItem('jwt')) {
-      const jwt = localStorage.getItem('jwt');
-      Auth.tokenValidation(jwt)
-      .then((res) => {
-        setLoggedIn(true);
-        setAuthorizedEmail(res.data.email);
-      })
-      .catch((err) => console.log(err));
-    }
-  };
+  // function handleTokenValid() {
+  //   if (localStorage.getItem('jwt')) {
+  //     const jwt = localStorage.getItem('jwt');
+  //     Auth.tokenValidation(jwt)
+  //     .then((res) => {
+  //       setLoggedIn(true);
+  //       setAuthorizedEmail(res.data.email);
+  //     })
+  //     .catch((err) => console.log(err));
+  //   }
+  // };
 
   function handleLoginSubmit(email, password) {
     if (!email || !password) {
       return;
     }
     Auth.authorize(email, password)
-      .then((jwt) => {
-        if (jwt) {
-          localStorage.setItem('jwt', jwt);
+      .then(() => {
           setLoggedIn(true);
           setRegOk(true);
           setAuthorizedEmail(email);
           history.push("/");
-        };
       })
       .catch((err) => {
         setLoggedIn(false);
@@ -163,7 +161,7 @@ function App() {
       .then(() => {
         setRegOk(true);
         handleInfoTooltip();
-        history.push("/sign-in");
+        history.push("/signin");
       })
       .catch(() => {
         setRegOk(false);
@@ -178,7 +176,7 @@ function App() {
   function signOut() {
     localStorage.removeItem("jwt");
     setLoggedIn(false);
-    history.push("/sign-in");
+    history.push("/signin");
   };
 
   return (
@@ -191,12 +189,12 @@ function App() {
           signOut={signOut}
         />
           <Switch>
-            <Route path='/sign-in'>
+            <Route path='/signin'>
               <Login 
                 onLogin={handleLoginSubmit}
               />
             </Route>
-            <Route path='/sign-up'>
+            <Route path='/signup'>
               <Register
                 onRegister={handleRegisterSubmit}
               />
@@ -214,7 +212,7 @@ function App() {
               loggedIn={loggedIn}
             />
             <Route>
-              {loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />}
+              {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />}
             </Route>
           </Switch>
         <Footer />

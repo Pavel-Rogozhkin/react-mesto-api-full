@@ -13,10 +13,10 @@ function Header( { email, signOut } ) {
       />
 
       <div className="navlink">
-        <Route exact path='/sign-in'><Link className="navlink__element" to="/sign-up">Регистрация</Link></Route>
-        <Route exact path='/sign-up'><Link className="navlink__element" to="/sign-in">Войти</Link></Route>
+        <Route exact path='/signin'><Link className="navlink__element" to="/signup">Регистрация</Link></Route>
+        <Route exact path='/signup'><Link className="navlink__element" to="/signin">Войти</Link></Route>
         <Route exact path='/'><p className="navlink__element" style={{cursor: "default"}}>{email}&nbsp;</p></Route>
-        <Route exact path='/'><Link className="navlink__element" onClick={signOut} to="/sign-in">Выйти</Link></Route>
+        <Route exact path='/'><Link className="navlink__element" onClick={signOut} to="/signin">Выйти</Link></Route>
       </div>
 
     </header>
