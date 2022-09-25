@@ -7,10 +7,8 @@ const { ForbError } = require('../errors/forb-err');
 const getCards = async (req, res, next) => {
   try {
     const cards = await Card.find({});
-    console.log(cards);
     return res.send(cards);
   } catch (err) {
-    console.log(err);
     return next(err);
   }
 };

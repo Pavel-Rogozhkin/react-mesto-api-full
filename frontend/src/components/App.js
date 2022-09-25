@@ -30,8 +30,6 @@ function App() {
   const [authorizedEmail, setAuthorizedEmail] = useState("");
   const [regOk, setRegOk] = useState(false);
 
-  console.log(loggedIn);
-
   useEffect( () => {
     if (!loggedIn) {
       Api.getUserInfo()
@@ -50,8 +48,9 @@ function App() {
         setCards(cardsItems);
       })
       .catch(err => {console.log(err)});
+      history.push('/');
     }
-  }, [loggedIn] );
+  }, [history, loggedIn] );
 
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
@@ -80,7 +79,9 @@ function App() {
   
   function handleCardLike(card) {
 
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
+    console.log(card);
+    console.log(currentUser._id);
     
     Api.changeCardLikeState(card._id, !isLiked)
       .then((newCard) => {
@@ -127,27 +128,7 @@ function App() {
       .catch(err => {console.log(err)});
   };
 
-  // useEffect(() => {
-  //   handleTokenValid();
-  // }, []);
 
-  // useEffect(() => {
-  //   if (loggedIn) {
-  //     history.push('/');
-  //   }
-  // }, [history, loggedIn]);
-
-  // function handleTokenValid() {
-  //   if (localStorage.getItem('jwt')) {
-  //     const jwt = localStorage.getItem('jwt');
-  //     Auth.tokenValidation(jwt)
-  //     .then((res) => {
-  //       setLoggedIn(true);
-  //       setAuthorizedEmail(res.data.email);
-  //     })
-  //     .catch((err) => console.log(err));
-  //   }
-  // };
 
   function handleLoginSubmit(email, password) {
     if (!email || !password) {
