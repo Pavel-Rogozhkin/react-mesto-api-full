@@ -26,6 +26,15 @@ class Auth {
     .then(this._getResponseData)
   };
 
+  signout() {
+    return fetch(`${this._url}/signout`, {
+      credentials: 'include',
+      method: "POST",
+      headers: this._headers,
+    })
+    .then(this._getResponseData)
+  };
+
   register(email, password) {
     return fetch(`${this._url}/signup`, {
       credentials: 'include',

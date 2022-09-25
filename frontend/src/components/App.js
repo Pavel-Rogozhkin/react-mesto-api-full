@@ -31,13 +31,16 @@ function App() {
   const [regOk, setRegOk] = useState(false);
 
   useEffect( () => {
-    if (!loggedIn) {
+    if (loggedIn) {
       Api.getUserInfo()
       .then(( userProfile ) => {
         setLoggedIn(true);
         setCurrentUser(userProfile);
         })
-      .catch(err => {console.log(err)});
+      .catch( (err) => {
+        console.log(err);
+        setLoggedIn(false);
+      });
     }
   }, [loggedIn] );
 
@@ -80,8 +83,6 @@ function App() {
   function handleCardLike(card) {
 
     const isLiked = card.likes.some(i => i === currentUser._id);
-    console.log(card);
-    console.log(currentUser._id);
     
     Api.changeCardLikeState(card._id, !isLiked)
       .then((newCard) => {
@@ -128,8 +129,6 @@ function App() {
       .catch(err => {console.log(err)});
   };
 
-
-
   function handleLoginSubmit(email, password) {
     if (!email || !password) {
       return;
@@ -166,8 +165,13 @@ function App() {
   };
 
   function signOut() {
-    // localStorage.removeItem("jwt");
-    setLoggedIn(false);
+    Auth.signout()
+      .then(() => {
+        setLoggedIn(false);
+      })
+      .catch((err) => {
+        setLoggedIn(true);
+      });
     history.push("/signin");
   };
 

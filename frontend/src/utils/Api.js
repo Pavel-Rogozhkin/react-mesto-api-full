@@ -3,7 +3,6 @@ class Api {
     this._url = url;
     this._headers = {
       'Content-Type': 'application/json',
-      // authorization: '05e45ebf-d4ff-4e41-8bcf-ab592cb66400',
     };
   };
 
