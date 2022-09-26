@@ -15,8 +15,8 @@
   color: black;
   transition: opacity .7s linear;
   cursor: pointer;
-};
+}
 
 .auth__submit:hover {
   opacity: 80%;
-};
+}
