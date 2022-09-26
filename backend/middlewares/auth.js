@@ -1,12 +1,17 @@
-/* eslint-disable import/no-unresolved */
 const jwt = require('jsonwebtoken');
 const { AuthError } = require('../errors/auth-err');
+require('dotenv').config();
+
+const {
+  NODE_ENV,
+  JWT_SECRET,
+} = process.env;
 
 const auth = async (req, res, next) => {
   let payload;
   const token = req.cookies.jwt;
   try {
-    payload = await jwt.verify(token, 'Enigma');
+    payload = await jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
   } catch (err) {
     return next(new AuthError('Требуется авторизация'));
   }

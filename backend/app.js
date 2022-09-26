@@ -10,12 +10,15 @@ const { cardsRoutes } = require('./routes/cards');
 const { createNewUser, login } = require('./controllers/users');
 const { auth } = require('./middlewares/auth');
 const { NotFoundError } = require('./errors/not-found-err');
-const { regexValidUrl } = require('./utils/consts');
+const { regexValidUrl, SERVER_CODE } = require('./utils/consts');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+require('dotenv').config();
 
-const { PORT = 4000 } = process.env;
-
-const SERVER_CODE = 500;
+console.log(process.env);
+const {
+  PORT = 4000,
+  MONGO_URI,
+} = process.env;
 
 const app = express();
 
@@ -89,7 +92,7 @@ app.use((err, req, res, next) => {
 });
 
 async function server() {
-  await mongoose.connect('mongodb://localhost:27017/mestodb', {
+  await mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: false,
   });

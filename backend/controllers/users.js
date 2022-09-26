@@ -1,5 +1,3 @@
-/* eslint-disable import/no-unresolved */
-
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
@@ -7,6 +5,12 @@ const { AuthError } = require('../errors/auth-err');
 const { ConfError } = require('../errors/conf-err');
 const { NotFoundError } = require('../errors/not-found-err');
 const { ReqError } = require('../errors/req-err');
+require('dotenv').config();
+
+const {
+  NODE_ENV,
+  JWT_SECRET,
+} = process.env;
 
 const getUsers = async (req, res, next) => {
   try {
@@ -117,7 +121,10 @@ const login = async (req, res, next) => {
     }
     const isValidUser = await bcrypt.compare(password, user.password);
     if (isValidUser) {
-      const token = jwt.sign({ _id: user._id }, 'Enigma');
+      const token = jwt.sign(
+        { _id: user._id },
+        NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+      );
       res.cookie('jwt', token, {
         expiresIn: '7d',
         httpOnly: true,
