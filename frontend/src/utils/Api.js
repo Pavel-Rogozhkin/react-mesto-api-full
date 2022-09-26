@@ -97,4 +97,4 @@ class Api {
 
 };
 
-export default new Api('http://localhost:4000');
+export default new Api('api.pashalex.nomorepartiesxyz.ru');
