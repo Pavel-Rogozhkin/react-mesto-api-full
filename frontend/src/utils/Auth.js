@@ -59,4 +59,5 @@ class Auth {
 
 };
 
-export default new Auth("api.pashalex.nomorepartiesxyz.ru");
+// export default new Auth("http://api.pashalex.nomorepartiesxyz.ru");
+export default new Auth("http://localhost:3000");
