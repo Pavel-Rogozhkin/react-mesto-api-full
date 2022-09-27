@@ -32,8 +32,6 @@ app.use(cors({
   origin: [
     'http://localhost:3000',
     'http://pashalex.nomorepartiesxyz.ru',
-    'https://localhost:3000',
-    'https://pashalex.nomorepartiesxyz.ru',
   ],
   credentials: true,
 }));
