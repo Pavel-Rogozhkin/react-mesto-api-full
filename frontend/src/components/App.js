@@ -46,12 +46,12 @@ function App() {
 
   useEffect( () => {
     if (loggedIn) {
+      history.push('/');
       Api.getCards()
       .then(( cardsItems ) => {
         setCards(cardsItems);
       })
       .catch(err => {console.log(err)});
-      history.push('/');
     }
   }, [history, loggedIn] );
 

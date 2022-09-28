@@ -10,14 +10,15 @@ const { cardsRoutes } = require('./routes/cards');
 const { createNewUser, login } = require('./controllers/users');
 const { auth } = require('./middlewares/auth');
 const { NotFoundError } = require('./errors/not-found-err');
-const { regexValidUrl, SERVER_CODE } = require('./utils/consts');
+const { regexValidUrl } = require('./utils/consts');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 require('dotenv').config();
+const errorsHandler = require('./middlewares/errors');
 
 console.log(process.env);
 const {
   PORT = 4000,
-  MONGO_URI,
+  MONGO_URI = 'mongodb://localhost:27017/mestodb',
 } = process.env;
 
 const app = express();
@@ -70,28 +71,14 @@ app.use(usersRoutes);
 app.use(cardsRoutes);
 
 app.use((req, res, next) => {
-  try {
-    return next(new NotFoundError('Страница не найдена'));
-  } catch (err) {
-    return next();
-  }
+  next(new NotFoundError('Страница не найдена'));
 });
 
 app.use(errorLogger);
 
 app.use(errors());
 
-app.use((err, req, res, next) => {
-  const { statusCode = SERVER_CODE, message } = err;
-  res
-    .status(statusCode)
-    .send({
-      message: statusCode === SERVER_CODE
-        ? 'На сервере произошла ошибка'
-        : message,
-    });
-  next();
-});
+app.use(errorsHandler);
 
 async function server() {
   await mongoose.connect(MONGO_URI, {

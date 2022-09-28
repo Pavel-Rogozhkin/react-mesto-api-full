@@ -29,9 +29,6 @@ const createNewUser = async (req, res, next) => {
     email,
     password,
   } = req.body;
-  if (!email || !password) {
-    return next(new AuthError('Требуется авторизация'));
-  }
   try {
     const hashPassword = await bcrypt.hash(password, 10);
     const newUser = await User.create({
@@ -111,9 +108,6 @@ const updateMainUserAvatar = async (req, res, next) => {
 
 const login = async (req, res, next) => {
   const { email, password } = req.body;
-  if (!email || !password) {
-    return next(new AuthError('Требуется авторизация'));
-  }
   try {
     const user = await User.findOne({ email }).select('+password');
     if (!user) {
